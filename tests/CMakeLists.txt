@@ -1,5 +1,6 @@
 set(TEST_SRC	test_main.cpp
-				test_slist.cpp)
+				base_tests.cpp
+				slist_interface.cpp)
 
 add_executable(tests ${TEST_SRC})
 target_link_libraries(tests collections CppUTest)

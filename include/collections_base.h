@@ -10,6 +10,8 @@
 #ifndef COLLECTIONS_BASE_H_
 #define COLLECTIONS_BASE_H_
 
+#include <stdint.h>
+
 // Base types
 typedef int c_bool;
 #define c_false (0)
@@ -39,5 +41,15 @@ enum c_iter_action_t {
 	IT_REMOVE,		//!< Remove node and continue
 	IT_REMOVE_STOP	//!< Remove node and stop iteration
 };
+
+/**
+ * Pointer to integer
+ */
+#define C_PTR_TO_INT(v) ((int)(intptr_t)v)
+
+/**
+ * Integer to pointer
+ */
+#define C_INT_TO_PTR(v) ((void *)v)
 
 #endif /* COLLECTIONS_BASE_H_ */
