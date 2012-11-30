@@ -7,7 +7,7 @@
  *      Author: Anatoly Galiulin
  */
 
-#include <collections_slist.h>
+#include "collections_int.h"
 #include <stdlib.h>
 #include <assert.h>
 
