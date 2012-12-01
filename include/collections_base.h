@@ -25,12 +25,7 @@ typedef void (*c_destructor_t)(void *data);
 /**
  * Single linked list node
  */
-typedef struct c_slist_node_t {
-
-	struct c_slist_node_t *next;
-	void *data;
-
-} c_slist_node_t;
+typedef void *c_slist_node_t;
 
 /**
  * Possible actions for iterators

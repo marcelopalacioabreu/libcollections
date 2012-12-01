@@ -5,7 +5,7 @@
 #define WORD3 "!"
 
 TEST_GROUP(slist_interface) {
-	c_slist_node_t *list;
+	c_slist_node_t list;
 
 	void setup() {
 		list = NULL;
@@ -20,22 +20,22 @@ TEST_GROUP(slist_interface) {
 };
 
 TEST(slist_interface, create_and_destroy) {
-	c_slist_node_t *list = c_slist_create(strdup("Hello"));
+	c_slist_node_t list = c_slist_create(strdup("Hello"));
 	list = c_slist_append(list, strdup("world"));
 
 	c_slist_destroy(list, free);
 }
 
-static c_bool count_chars(c_slist_node_t *n, void *data) {
+static c_bool count_chars(c_slist_node_t n, void *data) {
 	int *cc = (int *) data;
 
-	*cc += strlen((char *) n->data);
+	*cc += strlen((char *) c_slist_get_data(n));
 
 	return c_true;
 }
 
-static c_bool concat_nodes(c_slist_node_t *n, void *data) {
-	strcat((char *) data, (char *) n->data);
+static c_bool concat_nodes(c_slist_node_t n, void *data) {
+	strcat((char *) data, (char *) c_slist_get_data(n));
 
 	return true;
 }
@@ -54,15 +54,15 @@ TEST(slist_interface, iterate) {
 }
 
 TEST(slist_interface, append_and_prepend) {
-	c_slist_node_t *list = c_slist_create(C_INT_TO_PTR(1));
+	c_slist_node_t list = c_slist_create(C_INT_TO_PTR(1));
 	list = c_slist_append(list, C_INT_TO_PTR(2));
 	list = c_slist_prepend(list, C_INT_TO_PTR(0));
 
-	c_slist_node_t *c = list;
+	c_slist_node_t c = list;
 	int i = 0;
 
-	for(; c != NULL; i++, c = c->next) {
-		CHECK_EQUAL_C_INT(i, C_PTR_TO_INT(c->data));
+	for(; c != NULL; i++, c = c_slist_get_next(c)) {
+		CHECK_EQUAL_C_INT(i, C_PTR_TO_INT(c_slist_get_data(c)));
 	}
 
 	c_slist_destroy(list, NULL);

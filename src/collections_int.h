@@ -14,4 +14,13 @@
 
 #include <collections.h>
 
+typedef struct c_slist_node {
+
+	struct c_slist_node *next;
+	void *data;
+
+} c_slist_node;
+
+#define C_SLIST(v) ((c_slist_node*)v)
+
 #endif /* COLLECTIONS_INT_H_ */
